@@ -4,6 +4,9 @@ function QuestionItem({ question, onDelete, onUpdate }) {
   function handleChange(e) {
     const newIndex = parseInt(e.target.value);
 
+    
+    onUpdate({ ...question, correctIndex: newIndex });
+
     fetch(`http://localhost:4000/questions/${question.id}`, {
       method: "PATCH",
       headers: {
@@ -13,7 +16,7 @@ function QuestionItem({ question, onDelete, onUpdate }) {
     })
       .then((r) => r.json())
       .then((updatedQuestion) => {
-        onUpdate(updatedQuestion); // This updates App's state
+        onUpdate(updatedQuestion);
       });
   }
 
